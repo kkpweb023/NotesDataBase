@@ -1,9 +1,8 @@
 const mongoose = require('mongoose');
 
 const NoteSchema = new mongoose.Schema({
-    _id:Number,
 
+       image:String   
+});
+module.exports = mongoose.model('notes',NoteSchema);
 
-})
-
-module.exports = mongoose.model('bankdetails',NoteSchema);
