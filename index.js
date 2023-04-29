@@ -7,6 +7,7 @@ const Cors = require('cors')
 app.use(Cors())
 const Info = require('./DataBase/InfoSchema')
 const Students = require('./Database/StudentSchema');
+const port = process.env.PORT || 4000 ;
 
 
 //const multer = require('multer');
@@ -194,11 +195,7 @@ app.delete('/delete-student/:_id',async (req,res)=>{
 
 
 
+app.listen(port, () => {
+    console.log(`from port ${port}`)
 
-
-
-
-
-
-
-app.listen(4000)
+})
