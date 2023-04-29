@@ -5,8 +5,12 @@ let jsonParser = bodyParser.json();
 require('./Database/config');
 const Cors = require('cors')
 app.use(Cors())
-const multer = require('multer');
-const Name = require('./DataBase/NoteSchema');
+const Info = require('./DataBase/InfoSchema')
+const Students = require('./Database/StudentSchema');
+
+
+//const multer = require('multer');
+//const Name = require('./DataBase/NoteSchema');
 
 /*
 const upload = multer({
@@ -37,8 +41,6 @@ app.post('/upload',upload, async (req,res)=>{
 
 
 */
-
-
 
 
 //User Registration
@@ -83,6 +85,115 @@ app.post('/login',jsonParser,async(req,res)=>{
         res.send("Please signup")
    }
 })
+
+
+
+/*====================== Std_attendence ================== */
+
+
+app.post('/attendence',jsonParser,async(req,res)=>{
+
+    if(req.body.name==="" || req.body.subject==="" || req.body.remarks===""){
+           res.send("Field Empty")
+    }else{
+           const data = new Info({
+               name:req.body.name,
+               subject:req.body.subject,
+               remarks:req.body.remarks
+           })
+           let users = await data.save();
+           res.send(users);
+        
+   }       
+})
+
+
+app.get('/info_list', async (req, res) => {
+
+    const data = await Info.find({});
+
+    if(data.length > 0){
+        res.send(data)
+    }else{
+        res.send([]);
+    }
+})
+
+
+
+//select or update color and size
+
+app.put('/update-Product/:_id',jsonParser,async (req,res)=>{
+
+    let result = await Info.updateOne(
+         {_id:req.params._id},
+         {$set:req.body}
+    )
+    res.send(result);
+})
+
+
+
+app.delete('/delete-info/:_id', async (req,res)=>{
+
+    const user = await Info.findOne({_id:req.params._id});
+    const data = await Info.deleteOne({_id:req.params._id});
+
+   if(user){
+         res.send(data);
+   }else{
+      res.send("Already deleted");
+   }
+})
+
+
+
+
+
+
+
+
+
+
+
+
+/// ================ Class 5 students marks addd ====== ///////////////
+
+
+
+app.post('/add_Students',jsonParser, async (req,res)=>{
+
+    let data = new Students(req.body);
+    let students = await data.save();
+    res.send(students)
+
+})
+
+
+app.get('/list-students',async (req,res)=>{
+
+    let data = await Students.find({});
+
+    if(data.length > 0){
+        res.send(data)
+    }else{
+        res.send([]);
+    }
+ 
+})
+
+app.delete('/delete-student/:_id',async (req,res)=>{
+    
+    let data = await Students.deleteOne({_id:req.params._id});
+    res.send(data);
+     
+})
+
+
+
+
+
+
 
 
 
