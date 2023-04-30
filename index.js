@@ -1,13 +1,14 @@
 const express = require('express');
 const app = express();
-let bodyParser = require('body-parser');
-let jsonParser = bodyParser.json();
 const Cors = require('cors')
 app.use(Cors())
+let bodyParser = require('body-parser');
+let jsonParser = bodyParser.json();
+require('./DataBase/config');
 const port = process.env.PORT || 4000 ;
-require('./Database/config');
 const Info = require('./DataBase/InfoSchema')
 const Students = require('./Database/StudentSchema');
+const Users = require('./DataBase/UserSchema');
 
 
 
@@ -54,7 +55,7 @@ app.post('/register',jsonParser,async(req,res)=>{
     if(req.body.name==="" || req.body.email==="" || req.body.password===""){
            res.send("Field Empty")
     }else{
-       const user = await UserSchema.findOne({ email: req.body.email });
+       const user = await Users.findOne({ email: req.body.email });
 
        if(user){
              res.send("Email already register")
@@ -76,7 +77,7 @@ app.post('/register',jsonParser,async(req,res)=>{
 app.post('/login',jsonParser,async(req,res)=>{
 
    if(req.body.password && req.body.email){
-       let user = await UserSchema.findOne(req.body).select('-password');
+       let user = await Users.findOne(req.body).select('-password');
 
        if(user){
            res.send(user)
