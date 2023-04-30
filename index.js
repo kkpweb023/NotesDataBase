@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
-const Cors = require('cors')
-app.use(Cors())
+const cors = require('cors')
+app.use(cors());
 let bodyParser = require('body-parser');
 let jsonParser = bodyParser.json();
 require('./DataBase/config');
@@ -60,7 +60,7 @@ app.post('/register',jsonParser,async(req,res)=>{
        if(user){
              res.send("Email already register")
        }else{
-           const data = new UserSchema({
+           const data = new Users({
                name:req.body.name,
                email:req.body.email,
                password:req.body.password
