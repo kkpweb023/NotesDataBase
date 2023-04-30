@@ -4,7 +4,15 @@ const app = express();
 app.use(cors({
 
        origin: "https://kkpweb023.github.io" || "http://localhost:3000"
+       
+   
 }));
+
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    next();
+  });
+
 const port = process.env.PORT || 4000 ;
 require('./DataBase/config');
 let bodyParser = require('body-parser');
