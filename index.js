@@ -2,12 +2,13 @@ const express = require('express');
 const app = express();
 let bodyParser = require('body-parser');
 let jsonParser = bodyParser.json();
-require('./Database/config');
 const Cors = require('cors')
 app.use(Cors())
+const port = process.env.PORT || 4000 ;
+require('./Database/config');
 const Info = require('./DataBase/InfoSchema')
 const Students = require('./Database/StudentSchema');
-const port = process.env.PORT || 4000 ;
+
 
 
 //const multer = require('multer');
