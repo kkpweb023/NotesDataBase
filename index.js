@@ -1,11 +1,11 @@
 const express = require('express');
-const app = express();
 const cors = require('cors');
+const app = express();
 app.use(cors());
+const port = process.env.PORT || 4000 ;
+require('./DataBase/config');
 let bodyParser = require('body-parser');
 let jsonParser = bodyParser.json();
-require('./DataBase/config');
-const port = process.env.PORT || 4000 ;
 const Info = require('./DataBase/InfoSchema')
 const Students = require('./Database/StudentSchema');
 const Users = require('./DataBase/UserSchema');
