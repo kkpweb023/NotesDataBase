@@ -1,7 +1,10 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
-app.use(cors());
+app.use(cors({
+
+       origin: "https://kkpweb023.github.io" || "http://localhost:3000"
+}));
 const port = process.env.PORT || 4000 ;
 require('./DataBase/config');
 let bodyParser = require('body-parser');
