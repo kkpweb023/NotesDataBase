@@ -4,7 +4,6 @@ const app = express();
 app.use(cors())
 
 
-/*
 app.use((req, res, next)=>{  
     res.setHeader("Access-Control-Allow-Origin", "*"); 
 
@@ -47,7 +46,6 @@ app.use((req, res, next) => {
        origin:"*"
 
   }))
-*/
 
 
 
@@ -56,7 +54,7 @@ require('./DataBase/config');
 let bodyParser = require('body-parser');
 let jsonParser = bodyParser.json();
 const Info = require('./DataBase/InfoSchema')
-const Students = require('./Database/StudentSchema');
+//const Students = require('./Database/StudentSchema');
 const Users = require('./DataBase/UserSchema');
 
 
@@ -212,7 +210,7 @@ app.delete('/delete-info/:_id', async (req,res)=>{
 
 /// ================ Class 5 students marks addd ====== ///////////////
 
-
+/*
 
 app.post('/add_Students',jsonParser, async (req,res)=>{
 
@@ -242,7 +240,7 @@ app.delete('/delete-student/:_id',async (req,res)=>{
      
 })
 
-
+*/
 
 
 
