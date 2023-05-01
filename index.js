@@ -3,6 +3,7 @@ const cors = require('cors')
 const app = express();
 app.use(cors())
 
+
 /*
 app.use((req, res, next)=>{  
     res.setHeader("Access-Control-Allow-Origin", "*"); 
@@ -18,15 +19,15 @@ app.use((req, res, next)=>{
 }); 
 
 app.use(cors({
-    origin:"http://localhost:3000",
+
+    origin: "*",
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
+    methods:["GET","POST","PUT"],
     credentials:true,
-    methods:["GET","POST","PUT"]
 
 }))
-*/
 
-
-/*
 app.use(cors({
 
        origin: "https://kkpweb023.github.io" || "http://localhost:3000"
@@ -38,7 +39,17 @@ app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     next();
   });
-  */
+
+  app.use(cors({
+
+       allowedHeaders:"*",
+       allowedMethods:"*",
+       origin:"*"
+
+  }))
+*/
+
+
 
 const port = process.env.PORT || 4000 ;
 require('./DataBase/config');
@@ -156,6 +167,7 @@ app.get('/info_list', async (req, res) => {
     if(data.length > 0){
         res.send(data)
     }else{
+        res.header("Access-Control-Allow-Origin","*")
         res.send([]);
     }
 })
